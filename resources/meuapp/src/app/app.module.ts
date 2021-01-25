@@ -18,10 +18,12 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { AppComponent } from './app.component';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { HttpClientModule } from '@angular/common/http';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
