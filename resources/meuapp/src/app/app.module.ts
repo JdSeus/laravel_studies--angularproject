@@ -47,7 +47,14 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
     MatBadgeModule,
 
   ],
-  providers: [],
+  providers: [
+
+  ],
+
+  entryComponents: [
+    PostDialogComponent,
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
