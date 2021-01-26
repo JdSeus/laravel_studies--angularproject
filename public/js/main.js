@@ -287,9 +287,12 @@ class PostComponent {
     like() {
         this.postService.like(this.post.id);
     }
+    apagar() {
+        this.postService.apagar(this.post.id);
+    }
 }
 PostComponent.ɵfac = function PostComponent_Factory(t) { return new (t || PostComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_post_service__WEBPACK_IMPORTED_MODULE_1__["PostService"])); };
-PostComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PostComponent, selectors: [["app-post"]], inputs: { post: "post" }, decls: 16, vars: 5, consts: [["fxFlex", "", 1, "card"], ["mat-card-image", "", 3, "src"], ["mat-button", "", "color", "primary", 3, "click"], ["mat-button", ""], ["color", "warn", "matBadgePosition", "above after", "matBadgeColor", "warn", "matBadgeOverlap", "false", 3, "matBadge", 4, "ngIf"], ["color", "warn", "matBadgePosition", "above after", "matBadgeColor", "warn", "matBadgeOverlap", "false", 3, "matBadge"]], template: function PostComponent_Template(rf, ctx) { if (rf & 1) {
+PostComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PostComponent, selectors: [["app-post"]], inputs: { post: "post" }, decls: 16, vars: 5, consts: [["fxFlex", "", 1, "card"], ["mat-card-image", "", 3, "src"], ["mat-button", "", "color", "primary", 3, "click"], ["mat-button", "", "color", "accent", 3, "click"], ["color", "warn", "matBadgePosition", "above after", "matBadgeColor", "warn", "matBadgeOverlap", "false", 3, "matBadge", 4, "ngIf"], ["color", "warn", "matBadgePosition", "above after", "matBadgeColor", "warn", "matBadgeOverlap", "false", 3, "matBadge"]], template: function PostComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-card", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-card-header");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "mat-card-title");
@@ -311,7 +314,8 @@ PostComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "LIKE");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "button", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "SHARE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function PostComponent_Template_button_click_13_listener() { return ctx.apagar(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "APAGAR");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, PostComponent_mat_icon_15_Template, 2, 1, "mat-icon", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -379,6 +383,15 @@ class PostService {
         this.http.get('/api/like/' + id).subscribe((event) => {
             let p = this.posts.find((p) => p.id == id);
             p.likes = event.likes;
+        });
+    }
+    apagar(id) {
+        this.http.delete("/api/" + id)
+            .subscribe((event) => {
+            let i = this.posts.findIndex((p) => p.id == id);
+            if (i >= 0) {
+                this.posts.splice(i, 1);
+            }
         });
     }
 }
